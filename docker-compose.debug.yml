@@ -3,14 +3,16 @@ version: '3.4'
 services:
   revealjs:
     image: revealjs
-    build:
-      context: docker-masterclass-slides
-      dockerfile: ./Dockerfile
+    build: .
     environment:
       NODE_ENV: development
     ports:
       - 8000:8000
       - 9229:9229
-    command: ["npm", "start"] #"--inspect=0.0.0.0:9229", "dist/reveal.js"]
+    #command: ["npm", "start"] #"--inspect=0.0.0.0:9229", "dist/reveal.js"]
     volumes:
-      - $(pwd):/app
+      - ${PWD}:/app
+      - /app/node_modules
+    expose:
+      - 8000
+      - 9229

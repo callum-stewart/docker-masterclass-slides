@@ -55,6 +55,7 @@ const babelConfig = {
     ]]
 };
 
+
 // Our ES module bundle only targets newer browsers with
 // module support. Browsers are targeted explicitly instead
 // of using the "esmodule: true" target since that leads to

@@ -4,7 +4,7 @@ services:
   revealjs:
     image: revealjs
     build:
-      context: docker-masterclass-slides
+      context: .
       dockerfile: ./Dockerfile
     environment:
       NODE_ENV: production
