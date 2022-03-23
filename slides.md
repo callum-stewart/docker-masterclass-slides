@@ -1,3 +1,24 @@
+# Introduction
+
+
+
+## `$ whoami`
+- Overcaffinated fifth year MEng student
+- Long time Docker user
+- Likes terminals
+
+![Console Cowboy](img/console_cowboy.webp)
+
+
+
+## Who are you?
+- A developer that has at some point been frustrated by terrible install instructions on GitHub...
+- ... and has Docker installed on their computer...
+	- Or has logged into play-with-docker.com
+- ... and would like to learn a piece of technology that is rapidly becoming an industry standard
+
+
+
 # Motivation
 ## Why Docker?
 
@@ -35,9 +56,18 @@ docker-compose up -d
 
 
 
+### Dependency Hell
 ![Code and environment](img/docker-and-dependencies.png)
 - Solution?
 	- Ship an application *and* it's environment
+
+
+
+## Why not use a VM?
+![Docker vs VM](img/docker-vs-vm.jpg)
+- Docker containers are more lightweight and resource efficient
+- However, VMs are more isolated and secure
+
 
 
 
@@ -45,53 +75,116 @@ docker-compose up -d
 
 
 
-## What is an image?
+## What Is An Image?
 - A self contained unit of packaging containing everything requried for an application to run
 - A merged collection of read-only filesystem layers of one or more files
     - Typically represents a cut down file system
 - Usually very small
     - The Alpine linux container is only around 5MB!
+- Reusing file system layers saves disk space and time
 
 
-# Run through some examples
-    - Docker installation
-    - Have a git repo with slides and tagged steps
-    - Run through the examples, highlight tagged steps
-    - Learn to start, stop, restart and remove containers
-        - Naming, interactive mode, auto remove mode
-        - Mount file systems, open ports, set environment variables
-    - Learn how to list containers
-    - Learn how to attach to and execute code in a container
-    - Learn how to build images and tag them
-        - Learn Dockerfile syntax
-            - FROM, RUN, COPY, CMD, EXPOSE, EXEC, ENTRYPOINT
-        - Learn Docker image theory
-            - What are layers?
-            - How does the cache work?
-            - What is a container registry
-                - DockerHub
-        - Dockerfile best practices
-        - Multistage Docker images
-        - .dockerignore
-    - Docker secrets management
-    - Docker Compose to run multiple containers and clean up the command line
-    - CI CD pipeline to build and publish multipart container to Google Cloud Run
-# Slide 3
-<pre><code data-line-numbers="1|2|3-8|9|10-13|14|15">docker run -d
---publish 15789:1433
---env SA_PASSWORD=Testing1122
---env ACCEPT_EULA=Y
---env MSSQL_AGENT_ENABLED=True
---env MSSQL_DATA_DIR=/var/opt/sqlserver/sqldata
---env MSSQL_LOG_DIR=/var/opt/sqlserver/sqllog
---env MSSQL_BACKUP_DIR=/var/opt/sqlserver/sqlbackups
---network sqlserver
---volume sqlsystem:/var/opt/mssql
---volume sqldata:/var/opt/sqlserver/sqldata
---volume sqllog:/var/opt/sqlserver/sqllog
---volume sqlbackup:/var/opt/sqlserver/sqlbackups
---name sqlcontainer1
-mcr.microsoft.com/mssql/server:2019-CU5-ubuntu-18.04
-</pre></code>
+
+## What Is An Image?
+![Docker image layers](img/docker-layers.jpg)
 
 
+
+## What Is A Container?
+- A sandboxed process on your host that is isolated from all other processes and containers on the host
+	- Leveages linux kernel cgroups and namespaces to achieve this user space isolation
+- Is a runnable instance of an image
+	- Container image provides the custom isolated filesystem that the container uses
+- Are portable and runnable anywhere with a Docker engine installed
+
+
+
+## What Is A Container?
+![Container and images](img/docker-containers.jpg)
+
+
+
+## What Is A Registry?
+- Storage and content delivery system for named Docker images
+- Each image will usualy be available in many different tagged versions
+- Users interact with the registry by using the docker pull and and docker push commands
+- Uses DockerHub by default 
+
+
+
+## What Is A Registry?
+![Container Registry](img/docker-registry.png)
+
+
+
+## To The Terminal!
+![Cat](img/typing-cat.gif)
+
+
+
+## What Have We Done So Far?
+- Pulled down images from a registry
+- Learned how to create, start, stop, configure and interact with containers
+- I know that was fast, but the README.md in the docker-masterclass-code repository has a command reference
+
+
+
+# Dockerizing Your Applications!
+
+
+
+## Docker Workflow
+![Workflow](img/docker-workflow.png)
+
+
+
+## Creating An Image - Dockerfile
+- Dockerfiles contain instructions for creating images
+- Can start from scratch or can build upon preexisting images
+- Used with the `docker build` command
+- Can be used with `docker push` if you're logged in to push your image up to DockerHub
+
+
+
+## Persisting Data
+- Containers so far have been ephemeral
+	- Once the container is gone so is your data
+- We can persist data with docker volumes
+- This can either be a bind mount shared with the OS...
+- Or a a docker volume which is stored as a directory within your Docker host
+- Volumes use drivers, which let you add functionality
+
+
+
+## Persisting Data
+![Docker volume](img/docker-volumes.png)
+
+
+
+## Docker-Compose
+- A tool used to define and share multi-container applications
+- Services to be run and their configuration is defined by a YAML file
+- Easily shareable and can be checked into version control
+- Start entire application stacks with single command!
+
+
+
+## Docker-Compose
+![Docker compose](img/docker-compose.png)
+
+
+
+## Get It In The Cloud - Google Cloud Run
+- Develop and deploy highly scalable containerized applications on a fully managed serverless platform
+- Every cloud service provider has an analog of this kind of service, say Amazon ECS, Digital Ocean Droplets, etc
+![Cloud Run](img/cloud-run.png)
+
+
+
+## (Back) To The Terminal!
+![Cat](img/dog-keyboard.gif)
+
+
+
+# That's all, folks!
+## Any Questions?
